@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">  
+<style>
+
+    .mycolor {
+      background-color: #3a67b1;//#6d3b89;
+    }
+
+    .color {
+      color: #3a67b1; //#6d3b89;
+    }
+    .my-button {
+  background-color: #3a67b1; /* Blue background */
+  color: white; /* White text */
+  border: none; /* Removes border */
+  padding: 10px 20px; /* Padding for size */
+  font-size: 16px; /* Font size */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.my-button:hover {
+  background-color: #305a91; /* Darker blue on hover */
+}
+ 
+  </style>
+  <script>
+    
+    function logout()
+    {
+      google.script.run.withSuccessHandler(AfterLogOut).logoutUser();
+    }
+    function AfterLogOut()
+    {
+         document.getElementById("myid").click();
+    }
+
+  </script>
+</head>
+
+<body onload="">
+   
+  <button class="btn  float-end px-5 text-white" type="button" onclick="logout()">Log Out</button>
+  <a style="display:none" id="myid" href="<?= myURL(); ?>" target="_top">Link</a>
+  
+  <h3 class="mycolor p-2 text-white">Welcome to Health Services</h3>
+  <br><br><br><br><br><br>
+  <center>
+    <h1>Welcome to Health Services</h1>
+    <br><br><br><br>
+    </center>
+    <center><a href="https://form.jotform.com/232504259003042" target="_blank" class="my-button">Book an Appointment</a> <center>
+      <br><br><br><br><br>
+       <center><a href="https://form.jotform.com/232224204562041" target="_blank"class="my-button">Report a health issue</a> <center>
+ <br><br><br><br><br>
+       <center><a href="https://form.jotform.com/243413344815352" target="_blank"class="my-button">Repeat a Prescription</a> <center>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQ5SNBFVJE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CQ5SNBFVJE');
+</script>
+</body>
+
+</html>
