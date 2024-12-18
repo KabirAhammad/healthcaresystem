@@ -5,7 +5,7 @@ import webbrowser  # To open URLs (NHS and Google)
 import server  # Ensure server.py contains the necessary voice assistant logic
 
 # Initialize the Flask application
-#--app = Flask(__name__)
+app = Flask(__name__)
 
 # Enable CORS for all routes
 #--CORS(app)
