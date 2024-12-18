@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-#from flask_cors import CORS  # Import CORS to handle cross-origin requests
+from flask_cors import CORS  # Import CORS to handle cross-origin requests
 import threading
 import webbrowser  # To open URLs (NHS and Google)
 import server  # Ensure server.py contains the necessary voice assistant logic
@@ -8,7 +8,7 @@ import server  # Ensure server.py contains the necessary voice assistant logic
 app = Flask(__name__)
 
 # Enable CORS for all routes
-#--CORS(app)
+CORS(app)
 
 @app.route('/voice_assistant', methods=['GET'])
 def voice_assistant():

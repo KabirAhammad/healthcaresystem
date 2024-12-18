@@ -2,8 +2,8 @@ import speech_recognition as sr
 import webbrowser
 import pyttsx3
 
-# Initialize text-to-speech engine once
-engine = pyttsx3.init()
+# Initialize text-to-speech engine with 'espeak' driver
+engine = pyttsx3.init(driverName='espeak')
 
 def speak(text):
     """Speak the provided text."""
