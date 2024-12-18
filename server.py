@@ -1,15 +1,19 @@
 import speech_recognition as sr
 import webbrowser
 import pyttsx3
+import time
 
-# Initialize text-to-speech engine with 'espeak' driver
-engine = pyttsx3.init(driverName='espeak')
+# Initialize text-to-speech engine with 'nsss' driver for macOS
+engine = pyttsx3.init(driverName='nsss')
+#engine = pyttsx3.init(driverName='espeak')
+
 
 def speak(text):
     """Speak the provided text."""
     print(f"Speaking: {text}")  # Debugging log to see what's being spoken
     engine.say(text)
     engine.runAndWait()
+    time.sleep(1)  # Ensure a brief pause after speech for synchronization
 
 def take_command():
     """Listen for a voice command and return the recognized text."""
@@ -20,7 +24,7 @@ def take_command():
             listener.dynamic_energy_threshold = False  # Avoid recalculating noise levels
             print("Listening...")
             speak("How can I help you?")
-            voice = listener.listen(source, timeout=3, phrase_time_limit=5)
+            voice = listener.listen(source, timeout=5, phrase_time_limit=10)  # Increased timeout and phrase time limit
             command = listener.recognize_google(voice).lower()  # Convert to lowercase text
             print(f"You said: {command}")
             return command
@@ -57,7 +61,7 @@ def search(query, site="google"):
 
 def voice_google_search():
     """Main function to initiate the voice assistant."""
-    speak("Hello, I'm ready for your command.")
+    speak("Hello!")
     command = take_command()
 
     if command:
