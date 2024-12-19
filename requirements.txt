@@ -1,5 +1,9 @@
-flask
-flask-cors
-pyttsx3
-speechrecognition
-gunicorn
+
+Flask==2.1.0
+gunicorn==20.1.0
+Werkzeug==2.0.3
+Flask-CORS==3.0.10
+google-cloud-texttospeech==2.21.1
+gTTS==2.2.3
+SpeechRecognition==3.8.1
+dbus-python==1.3.2
