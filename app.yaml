@@ -1,5 +1,5 @@
 runtime: python310  # Use Python 3.10 for compatibility
-entrypoint: gunicorn -b :$PORT app:app # Use Gunicorn to run Flask app
+entrypoint: gunicorn -b :$PORT app:app  # Use Gunicorn to run Flask app
 
 env_variables:
   FLASK_APP: "app.py"
@@ -10,5 +10,5 @@ env_variables:
 handlers:
   - url: /static
     static_dir: static/  # Ensure your static files are correctly located
-  - url: /.*
+  - url: /.*  
     script: auto  # Direct all other routes to the app
