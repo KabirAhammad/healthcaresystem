@@ -1,6 +1,6 @@
 runtime: python310  # Use Python 3.10 for compatibility
 
-entrypoint: gunicorn -b :$PORT app:app  # Use Gunicorn to run Flask app
+entrypoint: gunicorn -b :$PORT app:app # Use Gunicorn to run Flask app
 
 env_variables:
   FLASK_APP: "app.py"
