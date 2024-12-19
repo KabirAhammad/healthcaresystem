@@ -11,4 +11,3 @@ handlers:
   - url: /static
     static_dir: static/  # Ensure your static files are correctly located
   - url: /.*  
-    script: auto  # Direct all other routes to the app
