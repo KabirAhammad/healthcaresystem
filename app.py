@@ -3,6 +3,8 @@ from flask_cors import CORS  # Import CORS to handle cross-origin requests
 import threading
 import webbrowser  # To open URLs (NHS and Google)
 import server  # Ensure server.py contains the necessary voice assistant logic
+import sys
+print(sys.version)
 
 # Initialize the Flask application
 app = Flask(__name__)
