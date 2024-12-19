@@ -1,26 +1,27 @@
-# Use the official Google Cloud Python base image
-FROM gcr.io/google-appengine/python
+# Use the official Python image as the base image
+FROM python:3.10-slim
 
-# Install additional dependencies (dbus and cmake)
-RUN apt-get update && \
-    apt-get install -y \
-    dbus \
-    cmake
+# Install required system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    pkg-config \
+    cmake \
+    libdbus-1-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy the requirements.txt file into the container
-COPY requirements.txt /app/
+# Copy requirements.txt and install dependencies
+COPY requirements.txt .
 
-# Install the Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your application code into the container
-COPY . /app/
+# Copy the rest of the application files
+COPY . .
 
-# Expose the port that the app will run on (default for Flask is 8080)
+# Expose the port the app will run on
 EXPOSE 8080
 
-# Specify the command to run your application
-CMD ["python", "main.py"]  # Replace with the entry point for your app
+# Set the entry point for the app
+CMD ["gunicorn", "-b", ":8080", "app:app"]
