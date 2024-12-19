@@ -1,0 +1,33 @@
+steps:
+  # Step 1: Set up the Python environment and install dependencies
+  - name: 'gcr.io/cloud-builders/python'
+    args:
+      - 'pip'
+      - 'install'
+      - '-r'
+      - 'requirements.txt'
+
+  # Step 2: Run tests (optional step if you have tests set up)
+  # You can skip this step or add your test commands if applicable
+  # - name: 'gcr.io/cloud-builders/python'
+  #   args:
+  #     - 'pytest'
+
+  # Step 3: Deploy to Google App Engine
+  - name: 'gcr.io/google-appengine/python'
+    args:
+      - 'gcloud'
+      - 'app'
+      - 'deploy'
+      - '--quiet'
+
+# Define substitution variables if needed for dynamic values like versions, project id, etc.
+substitutions:
+  _APP_NAME: 'healthcare-system'
+  _GCP_PROJECT_ID: 'healthcaresys2024'
+
+# Timeout to ensure the build doesn't hang indefinitely
+timeout: '600s'
+
+# Available Build Resources can be specified if needed, like the memory and CPU allocated
+availableMemoryMb: 2048

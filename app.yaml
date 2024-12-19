@@ -1,10 +1,9 @@
-runtime: python39  # Python 3.9 is more stable for App Engine
-
-entrypoint: gunicorn -b :$PORT app:app  # Use gunicorn to run Flask app
+runtime: python310  # Use Python 3.10 for compatibility
+entrypoint: gunicorn -b :$PORT app:app  # Use Gunicorn to run Flask app
 
 env_variables:
   FLASK_APP: "app.py"
-  FLASK_ENV: "development"
+  FLASK_ENV: "production"  # Set to production for the live environment
   FLASK_DEBUG: "0"
   GOOGLE_CLOUD_PROJECT: "healthcaresys2024"  # Google cloud project ID
 
