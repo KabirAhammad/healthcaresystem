@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare System - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/HealthcareLogo.png" alt="Healthcare Logo" height="100">
+            </a>
+            <div class="d-flex">
+                <a href="usefulLinks.html" class="btn btn-custom mx-2">Useful Links</a>
+
+                <!-- Services Dropdown Menu -->
+                <div class="dropdown">
+                    <a href="#" class="btn btn-custom mx-2 dropdown-toggle" id="servicesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Services
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                        <li><a href="https://form.jotform.com/232504259003042" class="dropdown-item" href="#">Book an Appointment</a></li>
+                        <li><a href="https://form.jotform.com/232224204562041" class="dropdown-item" href="#">Report a Health Issue</a></li>
+                        <li><a href="https://form.jotform.com/243413344815352" class="dropdown-item" href="#">Repeat a Prescription</a></li>
+                    </ul>
+                </div>
+
+                <a href="register.html" class="btn btn-custom mx-2">Register</a>
+                <a href="login.html" class="btn btn-custom mx-2">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Banner -->
+    <header class="banner text-center"></header>
+    
+    <!-- Buttons (Voice Assistant and Live Chat) -->
+    <div class="button-container">
+        <button class="btn btn-custom" id="voiceAssistantBtn">Voice Assistant</button>
+        <a href="login.html">
+            <button class="btn btn-custom" id="liveChatBtn">Live Chat</button>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <p>&copy; 2024 Healthcare System. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Voice Recognition -->
+    <script>
+        // Event listener for the "Voice Assistant" button
+        document.getElementById('voiceAssistantBtn').addEventListener('click', function() {
+            console.log("Voice Assistant button clicked!");
+            startListening(); // Start listening for voice command
+        });
+
+        // Start listening for a voice command
+        function startListening() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            if (!recognition) {
+                alert("Speech Recognition is not supported in your browser.");
+                return;
+            }
+            recognition.lang = 'en-US'; // Set the language
+            recognition.start(); // Start recognition process
+
+            recognition.onstart = function() {
+                console.log("Voice recognition started.");
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                console.log('You said:', transcript); // Log recognized command
+
+                // Send recognized command to backend for processing
+                fetch('https://healthcaresystem.azurewebsites.net/voice_assistant_process', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ command: transcript })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Backend processed the command:', data);
+                    alert('Voice Command Processed: ' + data.status);  // Show feedback
+                })
+                .catch(error => console.error('Error during voice command processing:', error));
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+                alert('Error in voice recognition. Please try again.');
+            };
+        }
+    </script>
+</body>
+</html>

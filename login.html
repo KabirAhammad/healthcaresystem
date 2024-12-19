@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare System - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/HealthcareLogo.png" alt="Healthcare Logo" height="100">
+            </a>
+            <div class="d-flex">
+                <!-- Home Button (Added in place of Login button) -->
+                <a href="index.html" class="btn btn-custom mx-2">Home</a>
+                <a href="register.html" class="btn btn-custom mx-2">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Form Section -->
+    <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
+        <div class="card" style="width: 30rem;">
+            <div class="card-body">
+                <h3 class="card-title text-center">Login</h3>
+                <form>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Assistant and Live Chat Buttons -->
+    <div class="button-container">
+        <button class="btn btn-custom" id="voiceAssistantBtn">Voice Assistant</button>
+        <a href="register.html">
+            <button class="btn btn-custom" id="liveChatBtn">Live Chat</button>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <p>&copy; 2024 Healthcare System. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Voice Recognition -->
+    <script>
+        // Event listener for the "Voice Assistant" button
+        document.getElementById('voiceAssistantBtn').addEventListener('click', function() {
+            console.log("Voice Assistant button clicked!");
+            startListening(); // Start listening for voice command
+        });
+
+        // Start listening for a voice command
+        function startListening() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            if (!recognition) {
+                alert("Speech Recognition is not supported in your browser.");
+                return;
+            }
+            recognition.lang = 'en-US'; // Set the language
+            recognition.start(); // Start recognition process
+
+            recognition.onstart = function() {
+                console.log("Voice recognition started.");
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                console.log('You said:', transcript); // Log recognized command
+
+                // Send recognized command to backend for processing
+                fetch('http://localhost:5001/voice_assistant_process', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ command: transcript })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Backend processed the command:', data);
+                    alert('Voice Command Processed: ' + data.status);  // Show feedback
+                })
+                .catch(error => console.error('Error during voice command processing:', error));
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+                alert('Error in voice recognition. Please try again.');
+            };
+        }
+    </script>
+</body>
+</html>

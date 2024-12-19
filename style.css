@@ -1,0 +1,168 @@
+/* General Styles */
+html, body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    height: 100%; /* Ensure body and html fill the viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar with Gradient */
+.custom-navbar {
+    background: linear-gradient(90deg, #ffffff, #1a56b8);
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar .navbar-brand img {
+    height: 100px; /* Set logo size */
+}
+
+.btn-custom {
+    background: linear-gradient(90deg, #fc4103, #feb47b);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.btn-custom:hover {
+    background: linear-gradient(90deg, #feb47b, #fc4103);
+}
+
+/* Blinking Animation */
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4; /* Button becomes semi-transparent */
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Voice Assistant Button - Custom Style with Permanent Blinking */
+#voiceAssistantBtn {
+    background: linear-gradient(90deg, #4caf50, #2e8b57); /* Green Gradient */
+    border-radius: 20px; /* Rounded corners */
+    animation: blink 1.5s infinite; /* Apply permanent blinking animation */
+}
+
+/* Live Chat Button - Custom Style with Permanent Blinking */
+#liveChatBtn {
+    background: linear-gradient(90deg, #007bff, #0056b3); /* Blue Gradient */
+    border-radius: 20px; /* Rounded corners */
+    animation: blink 1.5s infinite; /* Apply permanent blinking animation */
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+    min-width: 200px; /* Ensure dropdown menu items align well */
+    background-color: #0b5fd6; /* Same color as buttons */
+    border: 2px; /* Remove border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    visibility: hidden; /* Initially hidden */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition for opacity and visibility */
+}
+
+/* Dropdown Items */
+.dropdown-item {
+    color: white; /* Text color same as button */
+    padding: 10px 20px; /* Add padding for consistency with other buttons */
+    font-size: 16px;
+    border-radius: 15px; /* Rounded corners for each item */
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #feb47b; /* Hover effect similar to button hover */
+    color: #ffffff; /* Ensure text stays white */
+}
+
+/* Show the dropdown menu when hovering over the parent dropdown */
+.dropdown:hover .dropdown-menu {
+    visibility: visible; /* Make the dropdown visible */
+    opacity: 1; /* Make the dropdown fully opaque */
+}
+
+/* Main Banner */
+.banner {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 120px); /* Adjust the height to fill space between header and footer */
+    background-color: white; /* Background color white */
+    background-image: url('images/bg.png'); /* Set background image */
+    background-position: bottom center; /* Position the image at the bottom center */
+    background-size: 60%; /* Reduce the size of the image to 60% of its original size */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    padding-top: 10mm; /* Padding between the header and banner */
+    margin-bottom: 0; /* Remove bottom margin to ensure no space between image and footer */
+}
+
+/* Button Container */
+.button-container {
+    position: fixed;
+    bottom: 14mm; /* 12mm from footer */
+    right: 10mm;  /* 10mm from the right side */
+    display: flex;
+    gap: 3mm;  /* 2mm space between the buttons */
+    z-index: 9999; /* Ensure it's on top of other elements */
+}
+
+
+/* useful Link page */
+
+.card-title {
+    color:darkcyan;
+    font-family: sans-serif;
+}
+
+.card-text {
+    text-align: center;
+}
+
+.card-body{
+    border-color: aqua;
+    border-width: thick;
+    background-color: darkgray;
+    
+}
+
+
+/* Footer Styles */
+footer {
+    background-color: #3a67b1;
+    color: white;
+    padding: 10px 0;  /* Adjust padding to fit footer at the bottom */
+    text-align: center;
+    margin-top: auto; /* Push the footer to the bottom */
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        text-align: center;
+    }
+
+    .button-container {
+        bottom: 10mm; /* Slightly move up for small screens */
+        right: 5mm;   /* Adjust left position for smaller screens */
+    }
+
+    .banner {
+        height: 80vh; /* Reduce banner size for smaller screens */
+    }
+}
