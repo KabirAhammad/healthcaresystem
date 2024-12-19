@@ -1,17 +1,19 @@
 steps:
-  # Step 1: Set up the Python environment and install dependencies
+  # Step 1: Install system dependencies for dbus, cmake, and pkg-config
+  - name: 'ubuntu'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        apt-get update && apt-get install -y libdbus-1-dev cmake pkg-config
+
+  # Step 2: Set up the Python environment and install dependencies
   - name: 'gcr.io/cloud-builders/python'
     args:
       - 'pip'
       - 'install'
       - '-r'
       - 'requirements.txt'
-
-  # Step 2: Run tests (optional step if you have tests set up)
-  # You can skip this step or add your test commands if applicable
-  # - name: 'gcr.io/cloud-builders/python'
-  #   args:
-  #     - 'pytest'
 
   # Step 3: Deploy to Google App Engine
   - name: 'gcr.io/google-appengine/python'
