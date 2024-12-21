@@ -1,17 +1,32 @@
 import speech_recognition as sr
 import webbrowser
-import pyttsx3
+from google.cloud import texttospeech  # Import google-cloud-texttospeech
 import time
 
-# Initialize text-to-speech engine with 'nsss' driver for macOS
-engine = pyttsx3.init(driverName='nsss')
-# engine = pyttsx3.init(driverName='espeak')
+# Initialize the Google Cloud Text-to-Speech client
+client = texttospeech.TextToSpeechClient()
 
 def speak(text):
-    """Speak the provided text."""
+    """Speak the provided text using google-cloud-texttospeech."""
     print(f"Speaking: {text}")  # Debugging log to see what's being spoken
-    engine.say(text)
-    engine.runAndWait()
+
+    # Synthesize speech from the text
+    synthesis_input = texttospeech.SynthesisInput(text=text)
+    voice = texttospeech.VoiceSelectionParams(
+        language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
+    )
+    audio_config = texttospeech.AudioConfig(audio_encoding=texttospeech.AudioEncoding.MP3)
+
+    # Request speech synthesis
+    response = client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
+
+    # Save audio to a file and play it
+    with open("output.mp3", "wb") as out:
+        out.write(response.audio_content)
+
+    # Optionally, play the audio on the system
+    import os
+    os.system("mpg321 output.mp3")
     time.sleep(1)  # Ensure a brief pause after speech for synchronization
 
 def take_command():
