@@ -79,7 +79,7 @@
                 console.log('You said:', transcript); // Log recognized command
 
                 // Send recognized command to backend for processing
-                fetch('https://healthcaresystem.azurewebsites.net/voice_assistant_process', {
+                fetch('https://healthcaresys2024.ew.r.appspot.com', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ command: transcript })
