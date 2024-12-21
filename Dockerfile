@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     cmake \
     libdbus-1-dev \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*  # Clean up to reduce the image size
 
 # Set working directory
 WORKDIR /app
