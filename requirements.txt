@@ -5,4 +5,5 @@ Werkzeug==2.0.3
 google-cloud-texttospeech==2.21.1
 gTTS==2.2.3
 SpeechRecognition==3.8.1
+pyttsx3==2.90
 
