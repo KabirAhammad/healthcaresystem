@@ -1,13 +1,14 @@
 # Use the official Python image as the base image
 FROM python:3.10-slim
 
-# Install required system dependencies
+# Install required system dependencies, including glib-2.0
 RUN apt-get update && apt-get install -y \
     build-essential \
     pkg-config \
     cmake \
     libdbus-1-dev \
-    && rm -rf /var/lib/apt/lists/*  # Clean up to reduce the image size
+    libglib2.0-dev \   # Add this line to install glib-2.0
+    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
