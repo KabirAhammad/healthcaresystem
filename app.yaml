@@ -1,10 +1,12 @@
 runtime: custom
-env: flex  # Flexible environment
+env: flex
 
 env_variables:
   FLASK_APP: "app.py"
   FLASK_ENV: "production"
-  GOOGLE_CLOUD_PROJECT: "healthcaresys2024"  # your project ID
+  GOOGLE_CLOUD_PROJECT: "healthcaresys2024"  
+
+entrypoint: gunicorn -b :$PORT app:app
 
 handlers:
   - url: /static
