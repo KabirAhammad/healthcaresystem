@@ -5,8 +5,7 @@ import time
 
 # Initialize text-to-speech engine with 'nsss' driver for macOS
 engine = pyttsx3.init(driverName='nsss')
-#engine = pyttsx3.init(driverName='espeak')
-
+# engine = pyttsx3.init(driverName='espeak')
 
 def speak(text):
     """Speak the provided text."""
