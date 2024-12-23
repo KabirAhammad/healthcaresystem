@@ -1,7 +1,8 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS  # Import CORS to handle cross-origin requests
 import threading
 import webbrowser  # To open URLs
+import os  # For working with file paths
 import server  # Ensure server.py contains the necessary voice assistant logic
 
 # Initialize the Flask application
@@ -9,6 +10,9 @@ app = Flask(__name__)
 
 # Enable CORS for all routes
 CORS(app)
+
+# Serve static files (like CSS, JS, images) from the static folder
+app.config['STATIC_FOLDER'] = 'static'
 
 @app.route('/voice_assistant', methods=['GET'])
 def voice_assistant():
@@ -49,24 +53,21 @@ def voice_assistant_process():
         webbrowser.open(google_url)
         return jsonify({"status": f"Searching on Google for: {command}"}), 200
 
-
+# Serve the index.html file from the root folder
 @app.route('/', methods=['GET'])
 def home():
-    """A simple home route to confirm the server is running."""
-    return jsonify({"message": "Welcome to the Healthcare System Project API!"}), 200
-
+    """Serve the index.html file from the root folder."""
+    return send_from_directory(os.getcwd(), 'index.html')
 
 @app.errorhandler(404)
 def page_not_found(e):
     """Handle 404 errors for undefined routes."""
     return jsonify({"error": "Resource not found"}), 404
 
-
 @app.errorhandler(500)
 def internal_server_error(e):
     """Handle 500 errors for server issues."""
     return jsonify({"error": "Internal server error"}), 500
-
 
 if __name__ == '__main__':
     try:
