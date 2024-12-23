@@ -4,13 +4,13 @@ env: flex
 env_variables:
   FLASK_APP: "app.py"
   FLASK_ENV: "production"
-  GOOGLE_CLOUD_PROJECT: "healthcaresys2024"
+  GOOGLE_CLOUD_PROJECT: "healthcaresys2024"  
 
 entrypoint: gunicorn -b :$PORT app:app
 
+# For serving static files and routing all other requests to your app
 handlers:
   - url: /static
     static_dir: static/
-  - url: /.*
+  - url: /.*  # Catch-all handler to route all requests to your app
     script: auto
-  
